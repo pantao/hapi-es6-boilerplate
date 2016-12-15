@@ -1,0 +1,22 @@
+server:
+  connection:
+    port: 4000
+
+logger:
+  ops:
+    interval: 100000
+  reporters:
+    fileReporter:
+      - module: good-squeeze
+        name: Squeeze
+        args:
+          - ops: '*'
+            error: '*'
+            log: '*'
+            request: '*'
+            response: '*'
+      - module: good-squeeze
+        name: SafeJson
+      - module: good-file
+        args:
+          - 'logs/heb.log'

@@ -1,0 +1,55 @@
+server:
+  options:
+    debug:
+      request:
+        - error
+        - request-internal
+    connections:
+      state:
+        ignoreErrors: true
+        clearInvalid: true
+  connection:
+    port: 3000
+
+public:
+  enable: true
+  options:
+    path: public
+    redirectToSlash: true
+    index: false,
+    lookupCompressed: true
+
+swagger:
+  enable: true
+  options:
+    info:
+      title: 'Hapi ES6 Boilerplate'
+      description: '本文由 Hapi Swagger 插件自动生成'
+    documentationPath: '/developers/documentation'
+    pathPrefixSize: 3
+    basePath: /api
+    securityDefinitions:
+      jwt:
+        type: apiKey
+        name: Authorization
+        in: header
+      security:
+        -
+          jwt:
+
+logger:
+  ops:
+    interval: 60000
+  reporters:
+    consoleReporter:
+      - module: good-squeeze
+        name: Squeeze
+        args:
+          - ops: '*'
+            error: '*'
+            log: '*'
+            request: '*'
+            response: '*'
+            server: '*'
+      - module: good-console
+      - stdout
